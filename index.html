@@ -7,6 +7,90 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+/* ===== DARK MODE (padrao) ===== */
+:root {
+  --bg-body: #0f0f1a;
+  --bg-sidebar: #12121f;
+  --bg-header-start: #1a0a0a;
+  --bg-header-end: #0f0f1a;
+  --bg-btn: #1a1a2e;
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --bg-lightbox: rgba(0, 0, 0, 0.9);
+  --bg-toc-hover: rgba(201, 168, 76, 0.05);
+
+  --border-main: #2a2a3a;
+  --border-header: #3a1a1a;
+  --border-chapter: #1a1a2a;
+  --border-img: #2a2a3a;
+
+  --text-body: #d4c9a8;
+  --text-gold: #c9a84c;
+  --text-gold-dim: #8b7355;
+  --text-chapter-title: #d4b878;
+  --text-muted: #8a8a9a;
+  --text-muted2: #7a7a8a;
+  --text-muted3: #5a5a6a;
+  --text-muted4: #4a4a5a;
+  --text-muted5: #3a3a4a;
+  --text-session: #5a4a3a;
+  --text-act-num: #5a3a1a;
+  --text-caption: #6a6a7a;
+  --text-scene: #4a3a2a;
+  --text-synopsis: #9a9a8a;
+
+  --shadow-title: rgba(201, 168, 76, 0.3);
+  --shadow-act: rgba(201, 168, 76, 0.2);
+  --shadow-img: rgba(0, 0, 0, 0.5);
+  --shadow-gallery: rgba(0, 0, 0, 0.4);
+
+  --scrollbar-thumb: #3a2a1a;
+  --accent-red: #8b0000;
+
+  --theme-icon: "\263E";
+}
+
+/* ===== LIGHT MODE ===== */
+body.light {
+  --bg-body: #f5f0e6;
+  --bg-sidebar: #ebe5d8;
+  --bg-header-start: #e8dfd0;
+  --bg-header-end: #f5f0e6;
+  --bg-btn: #ebe5d8;
+  --bg-overlay: rgba(0, 0, 0, 0.35);
+  --bg-lightbox: rgba(255, 255, 255, 0.92);
+  --bg-toc-hover: rgba(120, 80, 10, 0.07);
+
+  --border-main: #d4cbb8;
+  --border-header: #c4a070;
+  --border-chapter: #e0d8c8;
+  --border-img: #d4cbb8;
+
+  --text-body: #2a2520;
+  --text-gold: #7a5a10;
+  --text-gold-dim: #8a7040;
+  --text-chapter-title: #4a3510;
+  --text-muted: #5a5550;
+  --text-muted2: #6a6560;
+  --text-muted3: #7a7570;
+  --text-muted4: #8a8580;
+  --text-muted5: #a09a90;
+  --text-session: #8a7a60;
+  --text-act-num: #8a7550;
+  --text-caption: #6a6560;
+  --text-scene: #c4b8a0;
+  --text-synopsis: #5a5550;
+
+  --shadow-title: rgba(120, 80, 10, 0.15);
+  --shadow-act: rgba(120, 80, 10, 0.1);
+  --shadow-img: rgba(0, 0, 0, 0.15);
+  --shadow-gallery: rgba(0, 0, 0, 0.1);
+
+  --scrollbar-thumb: #c4b8a0;
+  --accent-red: #b03030;
+
+  --theme-icon: "\2600";
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
@@ -15,20 +99,21 @@ html {
 }
 
 body {
-  background: #0f0f1a;
-  color: #d4c9a8;
+  background: var(--bg-body);
+  color: var(--text-body);
   font-family: 'Crimson Text', Georgia, serif;
   font-size: 18px;
   line-height: 1.8;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0f0f1a; }
-::-webkit-scrollbar-thumb { background: #3a2a1a; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #c9a84c; }
+::-webkit-scrollbar-track { background: var(--bg-body); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-gold); }
 
 /* Sidebar */
 .sidebar {
@@ -37,23 +122,23 @@ body {
   left: 0;
   width: 300px;
   height: 100vh;
-  background: #12121f;
-  border-right: 1px solid #2a2a3a;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-main);
   overflow-y: auto;
   z-index: 100;
   padding: 20px 0;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s;
 }
 
 .sidebar-header {
   padding: 20px 24px 30px;
-  border-bottom: 1px solid #2a2a3a;
+  border-bottom: 1px solid var(--border-main);
   margin-bottom: 10px;
 }
 
 .sidebar-header h2 {
   font-family: 'Cinzel', serif;
-  color: #c9a84c;
+  color: var(--text-gold);
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -61,7 +146,7 @@ body {
 }
 
 .sidebar-header .author {
-  color: #7a7a8a;
+  color: var(--text-muted2);
   font-size: 13px;
   margin-top: 4px;
 }
@@ -72,7 +157,7 @@ body {
 
 .toc-act-title {
   font-family: 'Cinzel', serif;
-  color: #8b7355;
+  color: var(--text-gold-dim);
   font-size: 13px;
   font-weight: 700;
   padding: 8px 24px;
@@ -84,7 +169,7 @@ body {
 }
 
 .toc-act-title:hover {
-  color: #c9a84c;
+  color: var(--text-gold);
 }
 
 .toc-chapters {
@@ -99,7 +184,7 @@ body {
 
 .toc-chapter {
   display: block;
-  color: #8a8a9a;
+  color: var(--text-muted);
   text-decoration: none;
   padding: 5px 24px 5px 36px;
   font-size: 14px;
@@ -108,14 +193,14 @@ body {
 }
 
 .toc-chapter:hover {
-  color: #c9a84c;
-  background: rgba(201, 168, 76, 0.05);
-  border-left-color: #c9a84c;
+  color: var(--text-gold);
+  background: var(--bg-toc-hover);
+  border-left-color: var(--text-gold);
 }
 
 .toc-gallery {
   display: block;
-  color: #8a8a9a;
+  color: var(--text-muted);
   text-decoration: none;
   padding: 10px 24px;
   font-family: 'Cinzel', serif;
@@ -123,13 +208,13 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-top: 1px solid #2a2a3a;
+  border-top: 1px solid var(--border-main);
   margin-top: 10px;
   transition: color 0.2s;
 }
 
 .toc-gallery:hover {
-  color: #c9a84c;
+  color: var(--text-gold);
 }
 
 /* Hamburger */
@@ -139,9 +224,9 @@ body {
   top: 15px;
   left: 15px;
   z-index: 200;
-  background: #1a1a2e;
-  border: 1px solid #2a2a3a;
-  color: #c9a84c;
+  background: var(--bg-btn);
+  border: 1px solid var(--border-main);
+  color: var(--text-gold);
   font-size: 24px;
   width: 44px;
   height: 44px;
@@ -149,6 +234,34 @@ body {
   cursor: pointer;
   line-height: 44px;
   text-align: center;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 200;
+  background: var(--bg-btn);
+  border: 1px solid var(--border-main);
+  color: var(--text-gold);
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.theme-toggle::after {
+  content: var(--theme-icon);
+}
+
+.theme-toggle:hover {
+  border-color: var(--text-gold);
 }
 
 /* Overlay for mobile sidebar */
@@ -159,7 +272,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--bg-overlay);
   z-index: 99;
 }
 
@@ -177,24 +290,24 @@ body {
 .book-header {
   text-align: center;
   padding: 100px 40px 80px;
-  background: linear-gradient(180deg, #1a0a0a 0%, #0f0f1a 100%);
-  border-bottom: 2px solid #3a1a1a;
+  background: linear-gradient(180deg, var(--bg-header-start) 0%, var(--bg-header-end) 100%);
+  border-bottom: 2px solid var(--border-header);
 }
 
 .book-header h1 {
   font-family: 'Cinzel', serif;
   font-size: 48px;
   font-weight: 900;
-  color: #c9a84c;
+  color: var(--text-gold);
   letter-spacing: 4px;
   text-transform: uppercase;
-  text-shadow: 0 2px 20px rgba(201, 168, 76, 0.3);
+  text-shadow: 0 2px 20px var(--shadow-title);
   margin-bottom: 16px;
 }
 
 .book-header .subtitle {
   font-family: 'Cinzel', serif;
-  color: #8b7355;
+  color: var(--text-gold-dim);
   font-size: 16px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -202,7 +315,7 @@ body {
 }
 
 .book-header .genre {
-  color: #5a5a6a;
+  color: var(--text-muted3);
   font-size: 14px;
   font-style: italic;
   margin-bottom: 30px;
@@ -211,7 +324,7 @@ body {
 .book-header .synopsis {
   max-width: 700px;
   margin: 0 auto;
-  color: #9a9a8a;
+  color: var(--text-synopsis);
   font-size: 17px;
   font-style: italic;
   line-height: 1.7;
@@ -231,7 +344,7 @@ body {
 
 .act-number {
   font-family: 'Cinzel', serif;
-  color: #5a3a1a;
+  color: var(--text-act-num);
   font-size: 14px;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -240,11 +353,11 @@ body {
 
 .act-title {
   font-family: 'Cinzel', serif;
-  color: #c9a84c;
+  color: var(--text-gold);
   font-size: 36px;
   font-weight: 700;
   letter-spacing: 2px;
-  text-shadow: 0 1px 10px rgba(201, 168, 76, 0.2);
+  text-shadow: 0 1px 10px var(--shadow-act);
 }
 
 .act-title::after {
@@ -252,19 +365,19 @@ body {
   display: block;
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #8b0000, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
   margin: 20px auto 0;
 }
 
 /* Chapter */
 .chapter {
   padding: 40px 0 60px;
-  border-bottom: 1px solid #1a1a2a;
+  border-bottom: 1px solid var(--border-chapter);
 }
 
 .chapter-number {
   font-family: 'Cinzel', serif;
-  color: #4a4a5a;
+  color: var(--text-muted4);
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -273,7 +386,7 @@ body {
 
 .session-date {
   font-family: 'Crimson Text', Georgia, serif;
-  color: #5a4a3a;
+  color: var(--text-session);
   font-size: 13px;
   font-style: italic;
   margin-bottom: 8px;
@@ -282,7 +395,7 @@ body {
 
 .chapter-title {
   font-family: 'Cinzel', serif;
-  color: #d4b878;
+  color: var(--text-chapter-title);
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 30px;
@@ -306,7 +419,7 @@ body {
   line-height: 0.8;
   margin-right: 8px;
   margin-top: 6px;
-  color: #c9a84c;
+  color: var(--text-gold);
 }
 
 .scene-break {
@@ -317,7 +430,7 @@ body {
 
 .scene-break::after {
   content: '* * *';
-  color: #4a3a2a;
+  color: var(--text-scene);
   font-size: 18px;
   letter-spacing: 8px;
 }
@@ -335,12 +448,12 @@ body {
 .chapter-image img {
   max-width: 100%;
   border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  border: 1px solid #2a2a3a;
+  box-shadow: 0 4px 20px var(--shadow-img);
+  border: 1px solid var(--border-img);
 }
 
 .chapter-image figcaption {
-  color: #6a6a7a;
+  color: var(--text-caption);
   font-size: 14px;
   font-style: italic;
   margin-top: 10px;
@@ -354,7 +467,7 @@ body {
 }
 
 .gallery-desc {
-  color: #7a7a8a;
+  color: var(--text-muted2);
   font-style: italic;
   text-align: center;
   margin-top: 10px;
@@ -374,8 +487,8 @@ body {
 .gallery-item img {
   width: 100%;
   border-radius: 4px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  border: 1px solid #2a2a3a;
+  box-shadow: 0 2px 12px var(--shadow-gallery);
+  border: 1px solid var(--border-img);
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -385,7 +498,7 @@ body {
 }
 
 .gallery-item figcaption {
-  color: #5a5a6a;
+  color: var(--text-muted3);
   font-size: 12px;
   margin-top: 8px;
 }
@@ -395,16 +508,16 @@ body {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background: #1a1a2e;
-  color: #c9a84c;
-  border: 1px solid #2a2a3a;
+  background: var(--bg-btn);
+  color: var(--text-gold);
+  border: 1px solid var(--border-main);
   width: 44px;
   height: 44px;
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, background 0.3s;
   z-index: 50;
   display: flex;
   align-items: center;
@@ -419,9 +532,9 @@ body {
 .footer {
   text-align: center;
   padding: 40px;
-  color: #3a3a4a;
+  color: var(--text-muted5);
   font-size: 13px;
-  border-top: 1px solid #1a1a2a;
+  border-top: 1px solid var(--border-chapter);
 }
 
 /* Lightbox */
@@ -432,7 +545,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: var(--bg-lightbox);
   z-index: 1000;
   cursor: pointer;
   align-items: center;
@@ -529,6 +642,13 @@ body {
     width: 40px;
     height: 40px;
   }
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
   .chapter-image img {
     border-radius: 2px;
   }
@@ -548,7 +668,7 @@ body {
 }
 
 @media print {
-  .sidebar, .hamburger, .back-to-top, .sidebar-overlay { display: none !important; }
+  .sidebar, .hamburger, .back-to-top, .sidebar-overlay, .theme-toggle { display: none !important; }
   .main { margin-left: 0; }
   .chapter { page-break-inside: avoid; }
   body { color: #000; background: #fff; font-size: 12pt; }
@@ -565,6 +685,9 @@ body {
 
 <!-- Hamburger -->
 <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()">&#9776;</button>
+
+<!-- Theme toggle -->
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Alternar tema claro/escuro"></button>
 
 <!-- Overlay -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
@@ -5222,6 +5345,21 @@ Um dia, talvez, alguem terminara de contar.
 </div>
 
 <script>
+// Theme toggle
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  var isLight = document.body.classList.contains('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+// Carregar tema salvo
+(function() {
+  var saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.body.classList.add('light');
+  }
+})();
+
 // Sidebar toggle
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
@@ -5251,7 +5389,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     var target = document.getElementById(targetId);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Atualizar URL sem recarregar
       history.pushState(null, null, href);
     }
   });
